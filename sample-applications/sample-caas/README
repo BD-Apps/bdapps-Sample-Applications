@@ -1,0 +1,29 @@
+Required software
+------------------
+- JDK 1.6 or upper
+- Maven 2.2.1 or upper
+
+Install TAP APP API Jar file
+------------------------
+Run the following command to install given API Jar File.
+mvn validate
+
+Build the project
+----------------------
+Go To : {home}/sample-caas
+mvn clean install
+
+Run the sample application
+---------------------------
+Go to :
+Linux - sample-caas/scripts/linux
+To get Payment Instrument List Run - get_pi_list.sh
+To send a Direct Debit Request Run - send_dd_request.sh
+To send a Query Balance Request Run - send_qb_request.sh
+
+Windows - sample-caas/scripts/win
+To get Payment Instrument List Run - get_pi_list.bat
+To send a Direct Debit Request Run - send_dd_request.bat
+To send a Query Balance Request Run - send_qb_request.bat
+
+NOTE : You can change any request parameter in each script.

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+    <servlet>
+        <servlet-name>moReceiver</servlet-name>
+        <servlet-class>hms.kite.samples.api.sms.MoSmsReceiver</servlet-class>
+        <init-param>
+            <param-name>smsReceiver</param-name>
+            <param-value>hms.kite.samples.client.SimpleClient</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>moReceiver</servlet-name>
+        <url-pattern>/mo-receiver</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>moUssdReceiver</servlet-name>
+        <servlet-class>hms.kite.samples.api.ussd.MoUssdReceiver</servlet-class>
+        <init-param>
+            <param-name>ussdReceiver</param-name>
+            <param-value>hms.kite.samples.client.SimpleClientUssd</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>moUssdReceiver</servlet-name>
+        <url-pattern>/mo-ussd</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>smsDeliveryReport</servlet-name>
+        <servlet-class>hms.kite.samples.api.sms.MoSmsDeliveryReportReceiver</servlet-class>
+        <init-param>
+            <param-name>smsDeReportReceiver</param-name>
+            <param-value>hms.kite.samples.client.SmsDeliveryReportService</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>smsDeliveryReport</servlet-name>
+        <url-pattern>/deliveryReport-sms</url-pattern>
+    </servlet-mapping>
+
+</web-app>

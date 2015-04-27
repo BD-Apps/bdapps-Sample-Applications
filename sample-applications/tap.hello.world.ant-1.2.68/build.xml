@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="tap-helloworld-app" default="build.war" basedir=".">
+    <property name="web.archive.name" value="tap-hello-world-app.war"></property>
+    <property name="web.app.dir" value="src/main/webapp"></property>
+    <property name="stand-alone.dir" value="target/stand-alone"></property>
+
+    <target name="clean.project">
+        <delete dir="target/*"/>
+    </target>
+
+    <target name="build.war" description="Create Web archive" depends="compile">
+
+        <fileset dir="src/main/webapp">
+            <include name="**/*"/>
+        </fileset>
+
+        <war destfile="target/${web.archive.name}" webxml="${web.app.dir}/WEB-INF/web.xml">
+            <classes dir="target/classes"/>
+            <lib dir="lib">
+                <exclude name="standalone.jar"/>
+            </lib>
+        </war>
+
+    </target>
+
+    <target name="build.standalone.app" depends="compile">
+        <jar basedir="target/classes" destfile="lib/standalone.jar">
+
+        </jar>
+    </target>
+
+    <path id="dev.lib">
+        <fileset dir="lib">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="lib">
+            <include name="**/*.war"/>
+        </fileset>
+    </path>
+
+    <target name="compile" depends="clean.project">
+        <mkdir dir="target/classes"/>
+        <javac srcdir="src/main/java" destdir="target/classes">
+            <classpath refid="dev.lib"/>
+        </javac>
+    </target>
+
+    <target name="build.stand-alone" description="Build a stand alone application"
+            depends="build.standalone.app, build.war">
+        <mkdir dir="${stand-alone.dir}"/>
+        <mkdir dir="${stand-alone.dir}/bin"/>
+        <mkdir dir="${stand-alone.dir}/lib"/>
+
+        <copy todir="${stand-alone.dir}/bin">
+            <fileset dir="src/main/bin"/>
+        </copy>
+
+        <copy todir="${stand-alone.dir}/lib">
+            <fileset dir="lib" includes="*.jar">
+                <exclude name="gson-1.7.2.jar"/>
+            </fileset>
+            <fileset dir="lib/jetty" includes="*.jar"/>
+            <fileset dir="target" includes="*.war"/>
+        </copy>
+
+    </target>
+
+</project>

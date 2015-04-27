@@ -1,0 +1,1 @@
+java -Djava.ext.dirs=../lib hms.kite.samples.standalone.MainApp
